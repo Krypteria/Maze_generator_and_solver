@@ -40,8 +40,8 @@ public class MainMenu extends JFrame {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(3,1));
 		
-		this.heightInfo = new JLabel("     height : ");
-		this.widthInfo = new JLabel("width : ");
+		this.heightInfo = new JLabel("height : ");
+		this.widthInfo = new JLabel(" width : ");
 		
 		this.height = new JTextArea();
 		this.width = new JTextArea();
