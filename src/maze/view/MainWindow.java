@@ -6,10 +6,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import maze.controller.Controller;
@@ -51,6 +53,7 @@ public class MainWindow extends JFrame{
 		
 		JButton generate = new JButton("Generate");
 		JButton solve = new JButton("Solve");
+		JButton save = new JButton("Save maze");
 		
 		generate.addActionListener(new ActionListener() {
 
@@ -70,14 +73,37 @@ public class MainWindow extends JFrame{
 			
 		});
 		
+		save.addActionListener(new ActionListener() {
+
+			private String file;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				do {
+					this.file = JOptionPane.showInputDialog("Select a name for the file");
+				}
+				while(file.equals(""));
+				
+				try {
+					c.saveMaze(file);
+					JOptionPane.showMessageDialog(null, "Maze saved successfully in Saves/" + this.file);
+				} catch (FileNotFoundException e) {
+					JOptionPane.showMessageDialog(getParent(), "Invalid file name, the maze has not been saved", "Error",JOptionPane.ERROR_MESSAGE);
+				}
+			
+			}
+			
+		});	
+		
 		
 		inf.add(generate);
 		inf.add(solve);
+		inf.add(save);
+		
 		
 		mainPanel.add(sup, BorderLayout.PAGE_START);
 		mainPanel.add(mazePanel, BorderLayout.CENTER);
 		mainPanel.add(inf, BorderLayout.PAGE_END);
-		
 		this.add(mainPanel,BorderLayout.CENTER);
 		
 		this.setSize(new Dimension(800,870));

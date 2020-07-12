@@ -1,5 +1,7 @@
 package maze.model;
 
+import org.json.JSONObject;
+
 public class Cell {
 	
 	private boolean visited;
@@ -66,4 +68,18 @@ public class Cell {
 		return this.down;
 	}
 	
+	public TransferObject generateTransferObject() {
+		TransferObject tObj = new TransferObject();
+		JSONObject objectInfo= new JSONObject();
+		
+		objectInfo.put("row", this.row);
+		objectInfo.put("col", this.col);
+		objectInfo.put("visited", this.visited);
+		objectInfo.put("solved", this.solved);
+		objectInfo.put("partOfSolution", this.partOfSolution);
+		
+		tObj.setObjectInfo(objectInfo);
+		
+		return tObj;
+	}
 }

@@ -1,7 +1,11 @@
 package maze.model;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Maze {
 
@@ -23,7 +27,6 @@ public class Maze {
 		this.solver = new MazeSolver(NFIL, NCOL);
 	}
 	
-	
 	public void generate() {
 		start = this.generator.generateStartPoint();
 		finish = this.generator.generateFinishPoint();
@@ -43,11 +46,35 @@ public class Maze {
 		solver.solve(maze, start, finish);
 	}
 	
+	public void saveMaze(String fileName) throws FileNotFoundException {
+		MazeDAO Dao = new MazeDAO();
+		Dao.saveMaze(fileName, this.generateTranferObject());
+	}
+	
 	public void addMazeObserver(MazeObserver o) {
 		generator.addObserver(o);
 	}
 	
 	public void addMazeSolverObserver(MazeSolverObserver o) {
 		solver.addObserver(o);		
+	}
+	
+	private TransferObject generateTranferObject() {
+		TransferObject tObj = new TransferObject();
+		JSONArray infoArray = new JSONArray();
+		JSONObject objectInfo = new JSONObject();
+		
+		for(int i = 0; i < NFIL; i++) {
+			for(int j = 0; j < NCOL; j++) {
+				infoArray.put(maze.get(i).get(j).generateTransferObject().getObjectInfo());
+			}
+		}
+		
+		objectInfo.put("maze", infoArray);
+		
+		tObj.setObjectInfo(objectInfo);
+		
+		
+		return tObj;
 	}
 }
