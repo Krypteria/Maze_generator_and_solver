@@ -18,7 +18,6 @@ public class MazeGenerator {
 	private Stack<Cell> stack;
 
 	private Random rand;
-	private MazeObserver observer;
 
 	public MazeGenerator(int f, int c) {
 		this.NFILM = f; 
@@ -27,10 +26,6 @@ public class MazeGenerator {
 		this.maze = new ArrayList<List<Cell>>();
 		this.stack = new Stack<Cell>();
 		this.rand = new Random();
-	}
-	
-	public void addObserver(MazeObserver o) {
-		this.observer = o;
 	}
 	
 	public void clear() {
@@ -43,8 +38,6 @@ public class MazeGenerator {
 		generateGrid(); 
 		generateMaze(this.maze.get(0).get(this.startPoint));
 		generateRandomPassages();
-		
-		this.observer.updateGUI(this.maze, this.startPoint, this.finishPoint);
 		
 		return this.maze;
 	}

@@ -190,7 +190,7 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	}
 
 	@Override
-	public void updateGUI(List<List<Cell>> m, int startPoint, int finishPoint) {
+	public void updateGUI(List<List<Cell>> m, int startPoint, int finishPoint) { //probablemente se puedan unificar los 2 observers
 		this.maze = m;
 		this.startPoint = startPoint;
 		this.finishPoint = finishPoint;

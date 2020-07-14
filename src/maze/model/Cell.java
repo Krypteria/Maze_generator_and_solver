@@ -20,6 +20,8 @@ public class Cell {
 		this.solved = false;
 		this.partOfSolution = false;
 	}
+	
+	public Cell() {}
 
 	public boolean Visited() {
 		return this.visited;
@@ -70,16 +72,26 @@ public class Cell {
 	
 	public TransferObject generateTransferObject() {
 		TransferObject tObj = new TransferObject();
-		JSONObject objectInfo= new JSONObject();
+		JSONObject objectInfo = new JSONObject();
 		
 		objectInfo.put("row", this.row);
 		objectInfo.put("col", this.col);
+		objectInfo.put("right", this.right);
+		objectInfo.put("down", this.down);
 		objectInfo.put("visited", this.visited);
-		objectInfo.put("solved", this.solved);
-		objectInfo.put("partOfSolution", this.partOfSolution);
 		
 		tObj.setObjectInfo(objectInfo);
 		
 		return tObj;
+	}
+	
+	public void setTransferObject(TransferObject o) {
+		JSONObject objectInfo = o.getObjectInfo();
+		
+		this.row = objectInfo.getInt("row");
+		this.col = objectInfo.getInt("col");
+		this.right = objectInfo.getBoolean("right");
+		this.down = objectInfo.getBoolean("down");
+		this.visited = objectInfo.getBoolean("visited");
 	}
 }

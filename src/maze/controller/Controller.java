@@ -1,5 +1,6 @@
 package maze.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import maze.model.Maze;
@@ -23,7 +24,8 @@ public class Controller {
 	}
 	
 	public void regenerateMaze() {
-		this.maze.regenerate();
+		this.maze.clear();
+		this.maze.generate();
 	}
 	
 	public void getSolution() {
@@ -32,6 +34,11 @@ public class Controller {
 	
 	public void saveMaze(String fileName) throws FileNotFoundException {
 		this.maze.saveMaze(fileName);
+	}
+	
+	public void loadMaze(File file) throws FileNotFoundException {
+		this.maze.clear();
+		this.maze.loadMaze(file);
 	}
 	
 	public void addMazeObserver(MazeObserver o) {

@@ -1,10 +1,16 @@
 package maze.model;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 
 public class MazeDAO {
 	
@@ -27,6 +33,17 @@ public class MazeDAO {
 		ps.close();
 		
 		System.out.println("File saved at " + fileName);
+	}
+	
+	public TransferObject loadMaze(File file) throws FileNotFoundException {
+		TransferObject tObj = new TransferObject();
+		
+		InputStream input = new FileInputStream(file);
+		JSONObject objectInfo = new JSONObject(new JSONTokener(input));
+		
+		tObj.setObjectInfo(objectInfo);
+		
+		return tObj;
 	}
 
 }
