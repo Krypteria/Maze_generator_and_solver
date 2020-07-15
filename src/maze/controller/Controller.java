@@ -10,20 +10,18 @@ import maze.model.MazeSolverObserver;
 public class Controller {
 
 	private Maze maze;
-	private int nR;
-	private int nC;
 	
 	public Controller(int r, int c) {
-		this.nR = r;
-		this.nC = c;
-		maze = new Maze(nR, nC);
+		maze = new Maze(r, c);
 	}
 	
 	public void generateMaze() {
 		this.maze.generate();
 	}
 	
-	public void regenerateMaze() {
+	public void regenerateMaze(int r, int c) {
+		Maze.NROW = r;
+		Maze.NCOL = c;
 		this.maze.clear();
 		this.maze.generate();
 	}

@@ -1,6 +1,7 @@
 package maze.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +11,10 @@ import java.io.FileNotFoundException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import maze.controller.Controller;
 
@@ -19,6 +22,17 @@ import maze.controller.Controller;
 public class ControlPanel extends JPanel {
 
 	private Controller c;
+	
+	private JButton generate;
+	private JButton solve; 
+	private JButton save; 
+	private JButton load;
+
+	private JLabel heightInfo;
+	private JLabel widthInfo;
+	
+	private JTextArea height;
+	private JTextArea width;
 	
 	public ControlPanel(Controller c) {
 		this.c = c;
@@ -29,16 +43,29 @@ public class ControlPanel extends JPanel {
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 		
-		JButton generate = new JButton("Generate");
-		JButton solve = new JButton("Solve");
-		JButton save = new JButton("Save maze");
-		JButton load = new JButton("Load maze");
+		generate = new JButton("Generate");
+		solve = new JButton("Solve");
+		save = new JButton("Save maze");
+		load = new JButton("Load maze");
+		
+		this.heightInfo = new JLabel("Height: ");
+		this.widthInfo = new JLabel("Width: ");
+		
+		this.height = new JTextArea("" + MainWindow.NROW);
+		this.width = new JTextArea("" + MainWindow.NCOL);
+		
+		this.height.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+		this.width.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+		this.height.setPreferredSize(new Dimension(60,20));
+		this.width.setPreferredSize(new Dimension(60,20));
 		
 		generate.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				c.regenerateMaze();
+				MainWindow.NROW = Integer.parseInt(height.getText());
+				MainWindow.NCOL = Integer.parseInt(width.getText()); 
+				c.regenerateMaze(MainWindow.NROW, MainWindow.NCOL);
 			}
 			
 		});
@@ -99,7 +126,10 @@ public class ControlPanel extends JPanel {
 			}
 		});
 		
-		
+		this.add(heightInfo);
+		this.add(height);
+		this.add(widthInfo);
+		this.add(width);
 		this.add(generate);
 		this.add(solve);
 		this.add(save);
