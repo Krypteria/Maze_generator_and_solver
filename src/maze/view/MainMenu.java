@@ -52,7 +52,8 @@ public class MainMenu extends JFrame {
 		this.height.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		this.width.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		
-		JLabel info = new JLabel("(max supported value: 30)");
+		JLabel info = new JLabel("(min supported value: 2)");
+		JLabel info2 = new JLabel("(max supported value: 30)");
 		
 		JPanel options = new JPanel();
 		options.setLayout(new GridLayout(4,1));
@@ -73,6 +74,7 @@ public class MainMenu extends JFrame {
 		options2.add(width);
 		
 		options3.add(info);
+		options3.add(info2);
 		
 		
 		options.add(options1);
@@ -91,6 +93,9 @@ public class MainMenu extends JFrame {
 				if(height.getText().matches("\\d+") && width.getText().matches("\\d+")) {
 					if(Integer.parseInt(height.getText()) > 30 || Integer.parseInt(width.getText()) > 30) {
 						JOptionPane.showMessageDialog(null, "30 is the maximum value allowed", "Error",JOptionPane.ERROR_MESSAGE);
+					}
+					else if(Integer.parseInt(height.getText()) < 2 || Integer.parseInt(width.getText()) < 2) {
+						JOptionPane.showMessageDialog(null, "2 is the minimum value allowed", "Error",JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						new MainWindow(Integer.parseInt(height.getText()), Integer.parseInt(width.getText()),new Controller(Integer.parseInt(height.getText()), Integer.parseInt(width.getText()))); 

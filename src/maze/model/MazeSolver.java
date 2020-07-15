@@ -7,19 +7,13 @@ public class MazeSolver {
 	
 	private int start;
 	private int finish;
-
-	private int NFIL;
-	private int NCOL;
-	
 	private int nVisited;
 	
 	private List<List<Cell>> maze;
 	private List<Cell> solution;
 	private List<MazeSolverObserver> observers;
 	
-	public MazeSolver(int f, int c) {
-		this.NFIL = f;
-		this.NCOL = c;
+	public MazeSolver() {
 		this.nVisited = 0;
 		solution = new ArrayList<Cell>();
 		this.observers = new ArrayList<MazeSolverObserver>();
@@ -49,7 +43,7 @@ public class MazeSolver {
 		recursiveSolution(maze.get(0).get(start));
 		
 		for(MazeSolverObserver o: this.observers) {
-			o.updateGUI(this.solution, NFIL * NCOL, nVisited, this.solution.size());
+			o.updateGUI(this.solution, Maze.NROW * Maze.NCOL, nVisited, this.solution.size());
 		}
 	}
 	
@@ -66,7 +60,7 @@ public class MazeSolver {
 		act.setSolvedVisited(true);
 		nVisited++;
 		
-		if(act.getRow() == NFIL - 1 && act.getCol() == finish) { //if is the correct path
+		if(act.getRow() == Maze.NROW - 1 && act.getCol() == finish) { //if is the correct path
 			solution.add(act);
 			act.partOfSolution(true);
 			return true;

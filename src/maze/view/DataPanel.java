@@ -1,9 +1,11 @@
 package maze.view;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,6 +28,7 @@ public class DataPanel extends JPanel implements MazeSolverObserver{
 	
 	private void initGUI() {
 		this.setLayout(new GridLayout(2,1));
+		this.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
 		
 		this.nTotalCells = new JLabel("" + 0);
 		this.nVisitedCells = new JLabel("" + 0);

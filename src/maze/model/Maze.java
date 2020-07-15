@@ -10,8 +10,8 @@ import org.json.JSONObject;
 
 public class Maze {
 
-	private int NFIL;
-	private int NCOL;
+	public static int NROW;
+	public static int NCOL;
 
 	private int start;
 	private int finish;
@@ -22,12 +22,12 @@ public class Maze {
 	
 	private MazeObserver observer;
 
-	public Maze(int f, int c) {
-		this.NFIL = f;
-		this.NCOL = c;	
+	public Maze(int r, int c) {
+		NROW = r;
+		NCOL = c;	
 		this.maze = new ArrayList<List<Cell>>();
-		this.generator = new MazeGenerator(NFIL, NCOL);
-		this.solver = new MazeSolver(NFIL, NCOL);
+		this.generator = new MazeGenerator();
+		this.solver = new MazeSolver();
 	}
 	
 	public void generate() {
@@ -68,19 +68,19 @@ public class Maze {
 		solver.addObserver(o);		
 	}
 	
-	private TransferObject generateTranferObject() { //queda guardar el start y el finish point
+	private TransferObject generateTranferObject() {
 		TransferObject tObj = new TransferObject();
 		JSONArray infoArray = new JSONArray();
 		JSONObject objectInfo = new JSONObject();
 		
-		for(int i = 0; i < NFIL; i++) {
+		for(int i = 0; i < NROW; i++) {
 			for(int j = 0; j < NCOL; j++) {
 				infoArray.put(maze.get(i).get(j).generateTransferObject().getObjectInfo());
 			}
 		}
 		
-		objectInfo.put("nRow", this.NFIL);
-		objectInfo.put("nCol", this.NCOL);
+		objectInfo.put("nRow", NROW);
+		objectInfo.put("nCol", NCOL);
 		objectInfo.put("startPoint", this.start);
 		objectInfo.put("finishPoint", this.finish);
 		objectInfo.put("maze", infoArray);
@@ -95,8 +95,8 @@ public class Maze {
 		JSONArray infoArray = new JSONArray();
 		JSONObject objectInfo = o.getObjectInfo();
 	
-		this.NFIL = objectInfo.getInt("nRow");
-		this.NCOL = objectInfo.getInt("nCol");
+		NROW = objectInfo.getInt("nRow");
+		NCOL = objectInfo.getInt("nCol");
 		
 		this.start = objectInfo.getInt("startPoint");
 		this.finish = objectInfo.getInt("finishPoint");
@@ -105,11 +105,11 @@ public class Maze {
 		infoArray = objectInfo.getJSONArray("maze");
 		int index = 0;
 		
-		for(int i = 0; i < this.NFIL; i++) {
+		for(int i = 0; i < NROW; i++) {
 			
 			List<Cell> listCell = new ArrayList<Cell>();
 			
-			for(int j = 0; j < this.NCOL; j++) {
+			for(int j = 0; j < NCOL; j++) {
 				TransferObject celltObj = new TransferObject();
 				JSONObject cellInfo = infoArray.getJSONObject(index);
 				

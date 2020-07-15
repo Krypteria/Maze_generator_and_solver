@@ -13,9 +13,9 @@ public class Controller {
 	private int nR;
 	private int nC;
 	
-	public Controller(int a, int h) {
-		this.nR = a;
-		this.nC = h;
+	public Controller(int r, int c) {
+		this.nR = r;
+		this.nC = c;
 		maze = new Maze(nR, nC);
 	}
 	

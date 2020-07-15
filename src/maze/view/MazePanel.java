@@ -1,7 +1,6 @@
 package maze.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -17,14 +16,14 @@ import maze.model.MazeSolverObserver;
 @SuppressWarnings("serial")
 public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserver{
 	
-	private int lineThickness = 8;
-	private int nFil;
-	private int nCol;
+	private static final int lineThickness = 8;
 	
 	private int xIni;
 	private int yIni;
 	
-	private Color solColor;
+	private final Color solColor = Color.green;
+	private final Color backgroundColor = Color.white;
+	private final Color lineColor = Color.black;
 
 	private List<List<Cell>> maze;
 	private List<Cell> solution;
@@ -33,15 +32,11 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	private int startPoint;
 	private int finishPoint;
 
-	public MazePanel(Controller c, int a, int b) {
+	public MazePanel(Controller c) {
 		c.addMazeObserver(this);
 		c.addMazeSolverObserver(this);
 		this.maze = null;
-		this.nFil = a;
-		this.nCol = b;
 		this.solved = false;
-		this.solColor = Color.green;
-		this.setSize(new Dimension(MainWindow.NFIL, MainWindow.NCOL));
 		this.setVisible(false);
 	}
 	
@@ -52,18 +47,18 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	    
-		this.xIni = (this.getWidth() - nFil * 3 * 8) / 2;
-		this.yIni = (this.getHeight() - nCol * 3 * 8) / 2;
+		this.xIni = (this.getWidth() - MainWindow.NCOL * 3 * 8) / 2;
+		this.yIni = (this.getHeight() - MainWindow.NROW * 3 * 8) / 2;
 
-		for(int x = 0; x <= MainWindow.NFIL * 3; x++) { //we paint the grid
+		for(int x = 0; x <= MainWindow.NROW * 3; x++) { //paints the grid
 			for(int y = 0; y <= MainWindow.NCOL * 3; y++) {
 				if(x % 3 == 0 || y % 3 == 0) {
-					g.setColor(Color.black);
-					g.fillRect(x * lineThickness + xIni, y * lineThickness + yIni, lineThickness, lineThickness);
+					g.setColor(lineColor);
+					g.fillRect(y * lineThickness + xIni, x * lineThickness + yIni, lineThickness, lineThickness);
 				}
 				else {
-					g.setColor(Color.white);
-					g.fillRect(x * lineThickness + xIni, y * lineThickness + yIni, lineThickness, lineThickness);					
+					g.setColor(backgroundColor);
+					g.fillRect(y * lineThickness + xIni, x * lineThickness + yIni, lineThickness, lineThickness);					
 				}
 			}	
 		}
@@ -71,8 +66,8 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 		walls(g); //we paint the walls of the maze	
 		
 		if(!solved) {
-			startPoint(g, Color.white);
-			finishPoint(g, Color.white);
+			startPoint(g, backgroundColor);
+			finishPoint(g, backgroundColor);
 		}
 		else {
 			startPoint(g, solColor);
@@ -135,7 +130,7 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	private void finishPoint(Graphics g, Color c) {
 		int x1 = ((finishPoint * 3) + 1) * lineThickness + xIni;
 		int x2 = ((finishPoint * 3) + 2) * lineThickness + xIni;
-		int y = (MainWindow.NCOL * 3) * lineThickness + yIni;
+		int y = (MainWindow.NROW * 3) * lineThickness + yIni;
 		
 		g.setColor(c);
 		g.clearRect(x1, y, lineThickness, lineThickness);
@@ -154,14 +149,14 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	private void walls(Graphics g) {
 			int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 			
-			for(int i = 0; i < this.nFil; i++) {
-				for(int j = 0; j < this.nCol; j++) {
+			for(int i = 0; i < MainWindow.NROW; i++) {
+				for(int j = 0; j < MainWindow.NCOL; j++) {
 					if(this.maze != null && this.maze.get(i).get(j).Visited()) {
 
 						boolean right = this.maze.get(i).get(j).getRightSide();
 						boolean down = this.maze.get(i).get(j).getDownSide();
 						
-						g.setColor(Color.white);
+						g.setColor(backgroundColor);
 						if(down == false) { 
 							x1 = (j * 3 + 1) * lineThickness + xIni;
 							x2 = (j * 3 + 2) * lineThickness + xIni;
@@ -190,7 +185,7 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	}
 
 	@Override
-	public void updateGUI(List<List<Cell>> m, int startPoint, int finishPoint) { //probablemente se puedan unificar los 2 observers
+	public void updateGUI(List<List<Cell>> m, int startPoint, int finishPoint) { 
 		this.maze = m;
 		this.startPoint = startPoint;
 		this.finishPoint = finishPoint;

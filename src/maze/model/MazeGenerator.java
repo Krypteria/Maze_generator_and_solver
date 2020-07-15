@@ -7,9 +7,6 @@ import java.util.Stack;
 
 public class MazeGenerator {
 	
-	private int NFILM; 
-	private int NCOLM;
-	
 	private int startPoint;
 	private int finishPoint;
 	private int cellsVisited;
@@ -19,9 +16,7 @@ public class MazeGenerator {
 
 	private Random rand;
 
-	public MazeGenerator(int f, int c) {
-		this.NFILM = f; 
-		this.NCOLM = c;
+	public MazeGenerator() {
 		this.cellsVisited = 0;
 		this.maze = new ArrayList<List<Cell>>();
 		this.stack = new Stack<Cell>();
@@ -46,9 +41,9 @@ public class MazeGenerator {
 	 * generates an initial canvas for start the generation of the maze
 	 */
 	private void generateGrid() {
-		for(int i = 0; i < NFILM; i++) {
-			maze.add(new ArrayList<Cell>(NCOLM));
-			for(int j = 0; j < NCOLM; j++) {
+		for(int i = 0; i < Maze.NROW; i++) {
+			maze.add(new ArrayList<Cell>(Maze.NCOL));
+			for(int j = 0; j < Maze.NCOL; j++) {
 				maze.get(i).add(j, new Cell(i,j));
 			}
 		}
@@ -59,10 +54,10 @@ public class MazeGenerator {
 	 * aggregate more variability in the way you can solve it
 	 */
 	private void generateRandomPassages() {
-		for(int i = 0; i < NFILM * 2; i++) {
+		for(int i = 0; i < Maze.NROW * 2; i++) {
 			
-			int x = rand.nextInt(NFILM - 1) + 0;
-			int y = rand.nextInt(NCOLM - 1) + 0;
+			int x = rand.nextInt(Maze.NROW - 1) + 0;
+			int y = rand.nextInt(Maze.NCOL - 1) + 0;
 			
 			if(rand.nextInt(20) + 0 > 10 && maze.get(x).get(y).getRightSide()) {
 				maze.get(x).get(y).setDownSide(false);
@@ -74,12 +69,12 @@ public class MazeGenerator {
 	}
 	
 	public int generateStartPoint(){
-		this.startPoint = rand.nextInt(NFILM);
+		this.startPoint = rand.nextInt(Maze.NCOL);
 		return this.startPoint;
 	}
 	
 	public int generateFinishPoint() {
-		this.finishPoint = rand.nextInt(NFILM);
+		this.finishPoint = rand.nextInt(Maze.NCOL);
 		return finishPoint;
 	}
 		
@@ -101,7 +96,7 @@ public class MazeGenerator {
 		
 		cellVisited(act);
  		
-		if(this.cellsVisited < NFILM * NCOLM) {	
+		if(this.cellsVisited < Maze.NROW * Maze.NCOL) {	
  					
 			posibilities = getNextAvalaibles(act.getRow(), act.getCol());
 
@@ -162,13 +157,13 @@ public class MazeGenerator {
 		if(c - 1 >= 0 && !maze.get(f).get(c - 1).Visited()) { //left
 			nextAvalaibles.add(maze.get(f).get(c - 1));
 		}
-		if(c + 1 < NCOLM && !maze.get(f).get(c + 1).Visited()) { //right
+		if(c + 1 < Maze.NCOL && !maze.get(f).get(c + 1).Visited()) { //right
 			nextAvalaibles.add(maze.get(f).get(c + 1));
 		}
 		if(f - 1 >= 0 && !maze.get(f - 1).get(c).Visited()) { //up
 			nextAvalaibles.add(maze.get(f - 1).get(c));
 		}
-		if(f + 1 < NFILM && !maze.get(f + 1).get(c).Visited()) { //down
+		if(f + 1 < Maze.NROW && !maze.get(f + 1).get(c).Visited()) { //down
 			nextAvalaibles.add(maze.get(f + 1).get(c));
 		}
 		
