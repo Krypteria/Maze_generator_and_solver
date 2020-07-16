@@ -16,7 +16,7 @@ public class MainWindow extends JFrame{
 	public static int NCOL;
 	
 	public static final int WIDTH = 870; 
-	public static final int HEIGHT = 800;
+	public static final int HEIGHT = 820;
 	
 	private Controller c;
 	

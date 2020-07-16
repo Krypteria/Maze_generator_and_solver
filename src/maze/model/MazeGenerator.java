@@ -54,7 +54,7 @@ public class MazeGenerator {
 	 * aggregate more variability in the way you can solve it
 	 */
 	private void generateRandomPassages() {
-		for(int i = 0; i < Maze.NROW * 2; i++) {
+		for(int i = 0; i < Math.max(Maze.NCOL, Maze.NROW) * 3; i++) {
 			
 			int x = rand.nextInt(Maze.NROW - 1) + 0;
 			int y = rand.nextInt(Maze.NCOL - 1) + 0;

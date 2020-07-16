@@ -16,7 +16,7 @@ import maze.model.MazeSolverObserver;
 @SuppressWarnings("serial")
 public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserver{
 	
-	private static final int lineThickness = 8;
+	private static final int lineThickness = 7;
 	
 	private int xIni;
 	private int yIni;
@@ -47,8 +47,8 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	    
-		this.xIni = (this.getWidth() - MainWindow.NCOL * 3 * 8) / 2;
-		this.yIni = (this.getHeight() - MainWindow.NROW * 3 * 8) / 2;
+		this.xIni = (this.getWidth() - MainWindow.NCOL * 3 * lineThickness) / 2;
+		this.yIni = (this.getHeight() - MainWindow.NROW * 3 * lineThickness) / 2;
 
 		for(int x = 0; x <= MainWindow.NROW * 3; x++) { //paints the grid
 			for(int y = 0; y <= MainWindow.NCOL * 3; y++) {

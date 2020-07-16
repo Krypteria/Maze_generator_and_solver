@@ -3,12 +3,14 @@ package maze.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -40,7 +42,7 @@ public class ControlPanel extends JPanel {
 	}
 	
 	private void initGUI() {
-		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.setLayout(new GridLayout(1,2));
 		this.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 		
 		generate = new JButton("Generate");
@@ -62,10 +64,23 @@ public class ControlPanel extends JPanel {
 		generate.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				MainWindow.NROW = Integer.parseInt(height.getText());
-				MainWindow.NCOL = Integer.parseInt(width.getText()); 
-				c.regenerateMaze(MainWindow.NROW, MainWindow.NCOL);
+			public void actionPerformed(ActionEvent arg0) {	
+				if(height.getText().matches("\\d+") && width.getText().matches("\\d+")) {
+					if(Integer.parseInt(height.getText()) > 30 || Integer.parseInt(width.getText()) > 30) {
+						JOptionPane.showMessageDialog(null, "30 is the maximum value allowed", "Error",JOptionPane.ERROR_MESSAGE);
+					}
+					else if(Integer.parseInt(height.getText()) < 2 || Integer.parseInt(width.getText()) < 2) {
+						JOptionPane.showMessageDialog(null, "2 is the minimum value allowed", "Error",JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						MainWindow.NROW = Integer.parseInt(height.getText());
+						MainWindow.NCOL = Integer.parseInt(width.getText()); 
+						c.regenerateMaze(MainWindow.NROW, MainWindow.NCOL);					
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "height and width must be numbers", "Error",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			
 		});
@@ -126,13 +141,24 @@ public class ControlPanel extends JPanel {
 			}
 		});
 		
-		this.add(heightInfo);
-		this.add(height);
-		this.add(widthInfo);
-		this.add(width);
-		this.add(generate);
-		this.add(solve);
-		this.add(save);
-		this.add(load);
+		JPanel generatePanel = new JPanel();
+		generatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		JPanel optionPanel = new JPanel();
+		optionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		generatePanel.add(heightInfo);
+		generatePanel.add(height);
+		generatePanel.add(widthInfo);
+		generatePanel.add(width);
+		generatePanel.add(Box.createRigidArea(new Dimension(10,10)));
+		generatePanel.add(generate);
+		
+		optionPanel.add(solve);
+		optionPanel.add(save);
+		optionPanel.add(load);
+		
+		this.add(generatePanel);
+		this.add(optionPanel);
 	}
 }
