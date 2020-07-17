@@ -3,7 +3,7 @@ package maze.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MazeSolver {
+public class Solver {
 	
 	private int start;
 	private int finish;
@@ -13,7 +13,7 @@ public class MazeSolver {
 	private List<Cell> solution;
 	private List<MazeSolverObserver> observers;
 	
-	public MazeSolver() {
+	public Solver() {
 		this.nVisited = 0;
 		solution = new ArrayList<Cell>();
 		this.observers = new ArrayList<MazeSolverObserver>();

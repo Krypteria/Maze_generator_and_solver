@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public class MazeGenerator {
+public class Generator {
 	
 	private int startPoint;
 	private int finishPoint;
@@ -16,7 +16,7 @@ public class MazeGenerator {
 
 	private Random rand;
 
-	public MazeGenerator() {
+	public Generator() {
 		this.cellsVisited = 0;
 		this.maze = new ArrayList<List<Cell>>();
 		this.stack = new Stack<Cell>();

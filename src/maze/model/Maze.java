@@ -17,8 +17,8 @@ public class Maze {
 	private int finish;
 	
 	private List<List<Cell>> maze;
-	private MazeGenerator generator;
-	private MazeSolver solver;
+	private Generator generator;
+	private Solver solver;
 	
 	private MazeObserver observer;
 
@@ -26,8 +26,8 @@ public class Maze {
 		NROW = r;
 		NCOL = c;	
 		this.maze = new ArrayList<List<Cell>>();
-		this.generator = new MazeGenerator();
-		this.solver = new MazeSolver();
+		this.generator = new Generator();
+		this.solver = new Solver();
 	}
 	
 	public void generate() {
