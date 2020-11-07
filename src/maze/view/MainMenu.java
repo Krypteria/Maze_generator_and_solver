@@ -68,6 +68,7 @@ public class MainMenu extends JFrame {
 		
 		JPanel options3 = new JPanel();
 		options3.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
 		options1.add(heightInfo);
 		options1.add(height);
 		options2.add(widthInfo);

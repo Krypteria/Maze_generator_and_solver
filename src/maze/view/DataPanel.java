@@ -1,19 +1,15 @@
 package maze.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 
 import maze.controller.Controller;
 import maze.model.Cell;
@@ -21,85 +17,79 @@ import maze.model.MazeSolverObserver;
 
 @SuppressWarnings("serial")
 public class DataPanel extends JPanel implements MazeSolverObserver{
-	
+
+	private JLabel title;
+
 	private JLabel nTotalCells;
 	private JLabel nVisitedCells;
 	private JLabel nCellsInSolution;
+	
+	private JLabel nTotalInfo;
+	private JLabel nVisitedInfo;
+	private JLabel nSolutionInfo;
 	
 	public DataPanel(Controller c) {
 		c.addMazeSolverObserver(this);
 		initGUI();
 	}
 	
-	
 	private void initGUI() {
-		this.setLayout(new GridLayout(1,2));
-		this.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		this.setLayout(new BorderLayout(5,5));
+		
+		this.title = new JLabel("Data Panel");
 		
 		this.nTotalCells = new JLabel("" + MainWindow.NROW * MainWindow.NCOL);
 		this.nVisitedCells = new JLabel("" + 0);
 		this.nCellsInSolution = new JLabel("" + 0);
 		
-		JLabel nTotalLabel = new JLabel("Number of total Cells in the maze: ");
-		JLabel nVisitedLabel = new JLabel("Number of visited Cells: ");
-		JLabel nSolutionLabel = new JLabel("Number of Cells in the path: ");
+		this.nTotalInfo= new JLabel("Number of total Cells in the maze: ");
+		this.nVisitedInfo= new JLabel("Number of visited Cells: ");
+		this.nSolutionInfo = new JLabel("Number of Cells in the path: ");
+	
+		JPanel p0 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel p3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
-		JButton logo = new JButton(new ImageIcon("icons/logo2.png"));	
-		logo.setOpaque(false);
-		logo.setContentAreaFilled(false);
-		logo.setBorderPainted(true);
-		logo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		p0.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		
-		JSeparator sep1 = new JSeparator();
-		sep1.setForeground(Color.BLACK);
-		sep1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		p0.add(this.title);
+		p1.add(this.nTotalInfo);
+		p1.add(this.nTotalCells);
+		p2.add(this.nVisitedInfo);
+		p2.add(this.nVisitedCells);
+		p3.add(this.nSolutionInfo);
+		p3.add(this.nCellsInSolution);
 		
-		JSeparator sep2 = new JSeparator();
-		sep2.setForeground(Color.BLACK);
-		sep2.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		p0.setMaximumSize(new Dimension(400,35));
+		p1.setMaximumSize(new Dimension(400,35));
+		p2.setMaximumSize(new Dimension(400,35));
+		p3.setMaximumSize(new Dimension(400,35));
 		
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.PAGE_AXIS));
-		infoPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 2, Color.BLACK));
+		JPanel sep1 = new JPanel();
+		sep1.setMaximumSize(new Dimension(400,25));
 		
-		JPanel logoPanel = new JPanel();
-		logoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		JPanel sep2 = new JPanel();
+		sep2.setMaximumSize(new Dimension(400,25));
 		
-		JPanel info1 = new JPanel();
-		info1.setLayout(new FlowLayout(FlowLayout.LEFT));
+		mainPanel.add(p0);
+		mainPanel.add(sep1);
+		mainPanel.add(p1);
+		mainPanel.add(p2);
+		mainPanel.add(p3);
 		
-		JPanel info2 = new JPanel();
-		info2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		mainPanel.setBorder(BorderFactory.createLineBorder(Color.black, 4));
 		
-		JPanel info3 = new JPanel();
-		info3.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
-		info1.add(nTotalLabel);
-		info1.add(this.nTotalCells);
-		
-		info2.add(nVisitedLabel);
-		info2.add(this.nVisitedCells);
-		
-		info3.add(nSolutionLabel);
-		info3.add(this.nCellsInSolution);
-		
-		infoPanel.add(info1);
-		infoPanel.add(Box.createRigidArea(new Dimension(2,2)));
-		infoPanel.add(sep1);
-		infoPanel.add(Box.createRigidArea(new Dimension(2,2)));
-		infoPanel.add(info2);
-		infoPanel.add(Box.createRigidArea(new Dimension(2,2)));
-		infoPanel.add(sep2);
-		infoPanel.add(Box.createRigidArea(new Dimension(2,2)));
-		infoPanel.add(info3);
-		
-		logoPanel.add(logo);
-		
-		this.add(infoPanel);
-		this.add(logoPanel);
+		this.add(mainPanel, BorderLayout.CENTER);
+		this.add(new JPanel(), BorderLayout.PAGE_START);
+		this.add(new JPanel(), BorderLayout.PAGE_END);
+		this.add(new JPanel(), BorderLayout.LINE_START);
+		this.add(new JPanel(), BorderLayout.LINE_END);
 	}
-
-
+	
 	@Override
 	public void updateGUI(List<Cell> s, int tc, int vc, int cs) {
 		this.nTotalCells.setText("" + tc);
