@@ -113,14 +113,16 @@ public class OptionsPanel extends JPanel{
 		p1.add(this.save);
 		p1.add(this.load);
 		
-		p0.setMaximumSize(new Dimension(400,35));
-		p1.setMaximumSize(new Dimension(400,35));
+		int x = 400, y = 35;
+		
+		p0.setMaximumSize(new Dimension(x,y));
+		p1.setMaximumSize(new Dimension(x,y));
 
 		JPanel sep1 = new JPanel();
-		sep1.setMaximumSize(new Dimension(400,25));
+		sep1.setMaximumSize(new Dimension(x,y));
 		
 		JPanel sep2 = new JPanel();
-		sep2.setMaximumSize(new Dimension(400,25));
+		sep2.setMaximumSize(new Dimension(x,y));
 
 		
 		mainPanel.add(p0);

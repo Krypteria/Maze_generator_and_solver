@@ -34,12 +34,13 @@ public class MainWindow extends JFrame{
 	
 	private void initGUI() {		
 		JPanel mainPanel = new JPanel(new BorderLayout(5,5));
-		//mainPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+		mainPanel.setBorder(BorderFactory.createLineBorder(Color.black, 4));
 		this.setContentPane(mainPanel);
 		
 		JPanel modelView = new JPanel(new GridLayout(1, 2));
 		
 		// ---------------------------------------------
+		
 		JPanel interactivePanel = new JPanel();
 		interactivePanel.setLayout(new BoxLayout(interactivePanel, BoxLayout.PAGE_AXIS));
 		
@@ -70,7 +71,6 @@ public class MainWindow extends JFrame{
 				
 		interactivePanelWrap.add(interactivePanel, BorderLayout.CENTER);
 
-		//DataPanel dataPanel = new DataPanel(c);
 		MazePanel mazePanel = new MazePanel(c);
 		
 		// ---------------------------------------------
@@ -80,10 +80,7 @@ public class MainWindow extends JFrame{
 		
 		mainPanel.add(modelView, BorderLayout.CENTER);
 		mainPanel.setVisible(true);
-		//ControlPanel controlPanel = new ControlPanel(c);
 		
-		//mainPanel.add(dataPanel, BorderLayout.PAGE_START);
-		//mainPanel.add(controlPanel, BorderLayout.PAGE_END);
 			
 		this.setSize(new Dimension(WIDTH,HEIGHT));
 		this.setTitle("Maze generator and solver");

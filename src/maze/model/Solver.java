@@ -13,10 +13,13 @@ public class Solver {
 	private List<Cell> solution;
 	private List<MazeSolverObserver> observers;
 	
+	private boolean solved;
+	
 	public Solver() {
 		this.nVisited = 0;
 		solution = new ArrayList<Cell>();
 		this.observers = new ArrayList<MazeSolverObserver>();
+		this.solved = false;
 	}
 	
 	public void addObserver(MazeSolverObserver o){
@@ -28,6 +31,7 @@ public class Solver {
 			this.maze.clear();
 			this.solution.clear();
 			this.nVisited = 0;	
+			this.solved = false;
 			
 			for(MazeSolverObserver o: this.observers) {
 				o.clear();
@@ -36,14 +40,19 @@ public class Solver {
 	}
 	
 	public void solve(List<List<Cell>> m, int a, int b) {
-		this.maze = m;
-		this.start = a;
-		this.finish = b;
 		
-		recursiveSolution(maze.get(0).get(start));
-		
-		for(MazeSolverObserver o: this.observers) {
-			o.updateGUI(this.solution, Maze.NROW * Maze.NCOL, nVisited, this.solution.size());
+		if(!solved) {
+			this.maze = m;
+			this.start = a;
+			this.finish = b;
+			
+			recursiveSolution(maze.get(0).get(start));
+			
+			for(MazeSolverObserver o: this.observers) {
+				o.updateGUI(this.solution, Maze.NROW * Maze.NCOL, nVisited, this.solution.size());
+			}
+			
+			solved = true;
 		}
 	}
 	

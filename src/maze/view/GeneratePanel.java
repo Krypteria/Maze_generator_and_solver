@@ -94,20 +94,22 @@ public class GeneratePanel extends JPanel{
 		p2.add(this.widthInfo);
 		p2.add(this.width);
 		p3.add(this.generate);
+		
+		int x = 400, y = 35;
 
-		p0.setMaximumSize(new Dimension(400,35));
-		p1.setMaximumSize(new Dimension(400,35));
-		p2.setMaximumSize(new Dimension(400,35));
-		p3.setMaximumSize(new Dimension(400,35));
+		p0.setMaximumSize(new Dimension(x,y));
+		p1.setMaximumSize(new Dimension(x,y));
+		p2.setMaximumSize(new Dimension(x,y));
+		p3.setMaximumSize(new Dimension(x,y));
 		
 		JPanel sep1 = new JPanel();
-		sep1.setMaximumSize(new Dimension(400,25));
+		sep1.setMaximumSize(new Dimension(x,y));
 		
 		JPanel sep2 = new JPanel();
-		sep2.setMaximumSize(new Dimension(400,25));
+		sep2.setMaximumSize(new Dimension(x,y));
 		
 		JPanel sep3 = new JPanel();
-		sep3.setMaximumSize(new Dimension(400,25));
+		sep3.setMaximumSize(new Dimension(x,y));
 		
 		mainPanel.add(p0);
 		mainPanel.add(sep2);
