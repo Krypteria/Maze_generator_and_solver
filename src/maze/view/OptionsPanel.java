@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import maze.controller.Controller;
+import maze.view.buttons.LoadButton;
+import maze.view.buttons.SaveButton;
+import maze.view.buttons.SolveButton;
 
 @SuppressWarnings("serial")
 public class OptionsPanel extends JPanel{
@@ -40,7 +43,7 @@ public class OptionsPanel extends JPanel{
 		
 		this.title = new JLabel("Options");
 		
-		this.solve = new JButton("Solve");		
+		this.solve = new SolveButton(ctrl);
 		this.solve.addActionListener(new ActionListener() {
 
 			@Override
@@ -50,7 +53,7 @@ public class OptionsPanel extends JPanel{
 			
 		});
 		
-		this.save = new JButton("Save maze");
+		this.save = new SaveButton(ctrl);
 		this.save.addActionListener(new ActionListener() {
 
 			private String file;
@@ -77,7 +80,7 @@ public class OptionsPanel extends JPanel{
 			
 		});	
 		
-		this.load = new JButton("Load maze");
+		this.load = new LoadButton(ctrl);
 		this.load.addActionListener(new ActionListener() {
 
 			@Override
@@ -116,7 +119,7 @@ public class OptionsPanel extends JPanel{
 		int x = 400, y = 35;
 		
 		p0.setMaximumSize(new Dimension(x,y));
-		p1.setMaximumSize(new Dimension(x,y));
+		p1.setMaximumSize(new Dimension(x,60));
 
 		JPanel sep1 = new JPanel();
 		sep1.setMaximumSize(new Dimension(x,y));

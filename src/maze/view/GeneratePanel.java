@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import maze.controller.Controller;
+import maze.view.buttons.*;
 
 @SuppressWarnings("serial")
 public class GeneratePanel extends JPanel{
@@ -54,7 +56,8 @@ public class GeneratePanel extends JPanel{
 		this.height.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		this.width.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		
-		this.generate = new JButton("Generate");
+		this.generate = new GenerateButton(ctrl);
+		this.generate.setIcon(new ImageIcon("icons/generateb_l.png"));
 		generate.addActionListener(new ActionListener() {
 
 			@Override
@@ -85,6 +88,7 @@ public class GeneratePanel extends JPanel{
 		JPanel p3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
 		p0.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		
@@ -100,7 +104,7 @@ public class GeneratePanel extends JPanel{
 		p0.setMaximumSize(new Dimension(x,y));
 		p1.setMaximumSize(new Dimension(x,y));
 		p2.setMaximumSize(new Dimension(x,y));
-		p3.setMaximumSize(new Dimension(x,y));
+		p3.setMaximumSize(new Dimension(x,60));
 		
 		JPanel sep1 = new JPanel();
 		sep1.setMaximumSize(new Dimension(x,y));
@@ -108,14 +112,10 @@ public class GeneratePanel extends JPanel{
 		JPanel sep2 = new JPanel();
 		sep2.setMaximumSize(new Dimension(x,y));
 		
-		JPanel sep3 = new JPanel();
-		sep3.setMaximumSize(new Dimension(x,y));
-		
 		mainPanel.add(p0);
 		mainPanel.add(sep2);
 		mainPanel.add(p1);
 		mainPanel.add(p2);
-		mainPanel.add(sep3);
 		mainPanel.add(p3);
 		
 		mainPanel.setBorder(BorderFactory.createLineBorder(Color.black, 4));
