@@ -185,10 +185,12 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	}
 
 	@Override
-	public void updateGUI(List<List<Cell>> m, int startPoint, int finishPoint) { 
+	public void updateGUI(List<List<Cell>> m, int startPoint, int finishPoint, int nrows, int ncols) { 
 		this.maze = m;
 		this.startPoint = startPoint;
 		this.finishPoint = finishPoint;
+		MainWindow.NROW = nrows;
+		MainWindow.NCOL = ncols;
 		
 		repaint();
 		this.setVisible(true);
@@ -204,6 +206,8 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	@Override
 	public void clear() {
 		this.solved = false;
+		this.maze.clear();
+		this.solution.clear();
 		repaint();
 	}
 	

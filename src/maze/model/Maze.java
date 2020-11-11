@@ -35,7 +35,7 @@ public class Maze {
 		finish = this.generator.generateFinishPoint();
 		maze = this.generator.generate();
 		
-		observer.updateGUI(maze, start, finish);
+		observer.updateGUI(maze, start, finish, Maze.NROW, Maze.NCOL);
 	}
 	
 	public void solve() {
@@ -57,7 +57,7 @@ public class Maze {
 		MazeDAO dao = new MazeDAO();
 		this.setTrasferObject(dao.loadMaze(file));
 		
-		observer.updateGUI(maze, start, finish);
+		observer.updateGUI(maze, start, finish, Maze.NROW, Maze.NCOL);
 	}
 	
 	public void addMazeObserver(MazeObserver o) {
