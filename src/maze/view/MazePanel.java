@@ -21,7 +21,7 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 	private int xIni;
 	private int yIni;
 	
-	private final Color solColor = Color.green;
+	private final float[] solColor = Color.RGBtoHSB(171, 42, 62, null); ;
 	private final Color backgroundColor = Color.white;
 	private final Color lineColor = Color.black;
 
@@ -37,7 +37,6 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 		c.addMazeSolverObserver(this);
 		this.maze = null;
 		this.solved = false;
-		this.setVisible(false);
 	}
 	
 	@Override
@@ -70,9 +69,10 @@ public class MazePanel extends JPanel implements MazeObserver, MazeSolverObserve
 			finishPoint(g, backgroundColor);
 		}
 		else {
-			startPoint(g, solColor);
-			finishPoint(g, solColor);
-			paintSolution(g, solColor);
+			Color co = Color.getHSBColor(this.solColor[0], this.solColor[1], this.solColor[2]);
+			startPoint(g, co);
+			finishPoint(g, co);
+			paintSolution(g, co);
 		}
 	}
 	
