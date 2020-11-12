@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import maze.controller.Controller;
 import maze.view.buttons.*;
@@ -29,8 +29,8 @@ public class GeneratePanel extends JPanel{
 	private JLabel heightInfo;
 	private JLabel widthInfo;
 	
-	private JTextArea height;
-	private JTextArea width;
+	private JTextField height;
+	private JTextField width;
 	
 	private JButton generate;
 	
@@ -47,11 +47,13 @@ public class GeneratePanel extends JPanel{
 		this.heightInfo = new JLabel("height : ");
 		this.widthInfo = new JLabel(" width : ");
 		
-		this.height = new JTextArea();
-		this.width = new JTextArea();
+		this.height = new JTextField();
+		this.width = new JTextField();
 		
-		this.height.setPreferredSize(new Dimension(70,20));
-		this.width.setPreferredSize(new Dimension(70,20));
+		this.height.setPreferredSize(new Dimension(90,20));
+		this.width.setPreferredSize(new Dimension(90,20));
+		
+		this.height.getDocument().putProperty("filterNewLines", Boolean.TRUE);
 		
 		this.height.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		this.width.setBorder(BorderFactory.createLineBorder(Color.black, 2));
@@ -86,7 +88,7 @@ public class GeneratePanel extends JPanel{
 		JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel p3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		
+				
 		p0.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
 		
 		JPanel mainPanel = new JPanel();
