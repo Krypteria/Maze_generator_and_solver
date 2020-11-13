@@ -29,7 +29,7 @@ utilizando el primero de los paneles que nos aparecen a la izquierda.
 
 #### ¿Como se generan los laberintos?
 
-Los laberintos se generan recursivamente utilizando una técnica llamada "Vuelta atrás", una vez que se termina de generar quitamos una serie de
+Los laberintos se generan recursivamente utilizando una técnica llamada "Vuelta atrás". Una vez que se termina de generar, quitamos una serie de
 muros de forma aleatoria para hacer que el laberinto sea más interesante y tenga más rutas.
 
 Los puntos de comienzo y final tambien se eligen aleatoriamente y siempre habrá como mínimo un camino que los conecten.
