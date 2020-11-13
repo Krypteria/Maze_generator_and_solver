@@ -76,7 +76,7 @@ Con esta opción podemos guardar el laberinto actual dandole un nombre distintiv
 
 ![Save1](https://user-images.githubusercontent.com/55555187/99093487-d44b5a00-25d2-11eb-83b0-2aeba800ac3b.png)
 
-![Save2](https://user-images.githubusercontent.com/55555187/99093511-da413b00-25d2-11eb-9b9f-b3e6e375b795.png)
+![Save2](https://user-images.githubusercontent.com/55555187/99106967-678d8b00-25e5-11eb-9a1c-f9570e30b95a.png)
 
 
 ### Cargar el laberinto
