@@ -22,7 +22,7 @@ public class MazeDAO {
 		
 		File fileCheck = new File("Saves/");
 		
-		if(!fileCheck.exists()) { //creates que Save directory if its not created
+		if(!fileCheck.exists()) { //creates a Save directory if its not created
 			fileCheck.mkdir();
 		}
 	
@@ -32,16 +32,19 @@ public class MazeDAO {
 		ps.println(o.getObjectInfo().toString(3));
 		ps.close();
 		
-		System.out.println("File saved at " + fileName);
 	}
 	
 	public TransferObject loadMaze(File file) throws FileNotFoundException {
 		TransferObject tObj = new TransferObject();
 		
 		InputStream input = new FileInputStream(file);
-		JSONObject objectInfo = new JSONObject(new JSONTokener(input));
-		
-		tObj.setObjectInfo(objectInfo);
+		try {
+			JSONObject objectInfo = new JSONObject(new JSONTokener(input));			
+			tObj.setObjectInfo(objectInfo);
+		}
+		catch(Exception e) {
+			throw new FileNotFoundException();
+		}
 		
 		return tObj;
 	}

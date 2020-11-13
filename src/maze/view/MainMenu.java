@@ -1,5 +1,6 @@
 package maze.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -77,7 +78,6 @@ public class MainMenu extends JFrame {
 		options3.add(info);
 		options3.add(info2);
 		
-		
 		options.add(options1);
 		options.add(options2);
 		options.add(Box.createRigidArea(new Dimension(15,15)));
@@ -125,7 +125,8 @@ public class MainMenu extends JFrame {
 		
 		JPanel logoP = new JPanel();
 		logoP.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
+
+
 		JButton logo = new JButton(new ImageIcon("icons/logo.png"));	
 		logo.setOpaque(false);
 		logo.setContentAreaFilled(false);
@@ -133,8 +134,15 @@ public class MainMenu extends JFrame {
 		
 		logoP.add(logo);
 		
+		JPanel sep1 = new JPanel();
+		sep1.setPreferredSize(new Dimension(20, 20));
+		
+		JPanel secondPanel = new JPanel(new BorderLayout());
+		secondPanel.add(options, BorderLayout.CENTER);
+		secondPanel.add(sep1, BorderLayout.PAGE_START);
+		
 		mainPanel.add(logoP);
-		mainPanel.add(options);
+		mainPanel.add(secondPanel);
 		mainPanel.add(buttons);
 		
 		mainPanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));

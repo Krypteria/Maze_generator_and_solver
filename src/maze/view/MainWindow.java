@@ -47,7 +47,7 @@ public class MainWindow extends JFrame{
 		int x = 1000, y = 1000;
 		JPanel generate = createViewPanel(new GeneratePanel(c), x, y);
 		JPanel data = createViewPanel(new DataPanel(c), x, y);
-		JPanel options = createViewPanel(new OptionsPanel(c), x, y);
+		JPanel options = createViewPanel(new OptionsPanel(c, this), x, y);
 		JPanel logo = createViewPanel(new LogoPanel(), x, y);
 		
 		interactivePanel.add(generate);

@@ -33,8 +33,11 @@ public class OptionsPanel extends JPanel{
 	private JButton save; 
 	private JButton load;
 	
-	public OptionsPanel(Controller c) {
+	private MainWindow parent;
+	
+	public OptionsPanel(Controller c, MainWindow p) {
 		this.ctrl = c;
+		this.parent = p;
 		initGUI();
 	}
 	
@@ -60,21 +63,27 @@ public class OptionsPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				do {
-					this.file = JOptionPane.showInputDialog("Select a name for the file");
-					if(this.file == null)
-						break;
-				}
-				while(file.equals(""));
 				
-				if(file != null) {					
+				SaveDialog dialog = new SaveDialog(parent);
+				dialog.setLocationRelativeTo(getParent());
+				
+				int returnValue = dialog.open();
+
+				if(returnValue == 1) {
+					this.file = dialog.getName();
+				}
+					
+				if(file != null && file.length() != 0) {					
 					try {
 						ctrl.saveMaze(file);
-						JOptionPane.showMessageDialog(null, "Maze saved successfully in Saves/" + this.file);
+						JOptionPane.showMessageDialog(getParent(), "Maze saved successfully in Saves/" + this.file);
 					} 
 					catch (FileNotFoundException e) {
 						JOptionPane.showMessageDialog(getParent(), "Invalid file name, the maze has not been saved", "Error",JOptionPane.ERROR_MESSAGE);
 					}
+				}
+				else if (file != null && file.length() == 0) {
+					JOptionPane.showMessageDialog(getParent(), "Invalid file name, the maze has not been saved", "Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			
@@ -86,6 +95,8 @@ public class OptionsPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser(new File("Saves"));
+				fileChooser.setDialogTitle("Load");
+				
 				int sel = fileChooser.showOpenDialog(getParent());
 				
 				if(sel == JFileChooser.APPROVE_OPTION) {
@@ -93,10 +104,10 @@ public class OptionsPanel extends JPanel{
 						ctrl.loadMaze(fileChooser.getSelectedFile());
 					} 
 					catch (FileNotFoundException e1) {
-						JOptionPane.showMessageDialog(getParent(), "File not found", "Error",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(getParent(), "Invalid file selected", "Error",JOptionPane.ERROR_MESSAGE);
 					}
 				}
-				else {
+				else if (sel != JFileChooser.CANCEL_OPTION) {
 					JOptionPane.showMessageDialog(getParent(), "Invalid file selected", "Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
