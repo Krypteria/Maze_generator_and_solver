@@ -36,7 +36,7 @@ public class SaveDialog extends JDialog{
 		this.name.setPreferredSize(new Dimension(200,20));
 		this.name.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 		
-		this.accept = new JButton("Accept");
+		this.accept = new JButton("Ok");
 		this.cancel = new JButton("Cancel");
 		
 		this.accept.addActionListener(new ActionListener() {
