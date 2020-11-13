@@ -87,7 +87,7 @@ public class MainWindow extends JFrame{
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);;
 	}
 	
 	private JPanel createViewPanel(JComponent c, int x, int y) {

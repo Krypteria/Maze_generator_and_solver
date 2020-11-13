@@ -76,7 +76,7 @@ public class OptionsPanel extends JPanel{
 				if(file != null && file.length() != 0) {					
 					try {
 						ctrl.saveMaze(file);
-						JOptionPane.showMessageDialog(getParent(), "Maze saved successfully in Saves/" + this.file);
+						JOptionPane.showMessageDialog(getParent(), "Maze saved successfully in Saves/" + this.file, "Save", JOptionPane.INFORMATION_MESSAGE);
 					} 
 					catch (FileNotFoundException e) {
 						JOptionPane.showMessageDialog(getParent(), "Invalid file name, the maze has not been saved", "Error",JOptionPane.ERROR_MESSAGE);
