@@ -1,4 +1,4 @@
-# Maze generator and solver
+# Generador y solucionador de laberintos
 
 Este es un proyecto personal desarrollado durante mi segundo año en la carrera de Ingenieria Informatica en la UCM, se trata de un generador y solucionador de laberintos
 creado en Java.
