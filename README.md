@@ -3,6 +3,13 @@
 Este es un proyecto personal desarrollado durante mi segundo año en la carrera de Ingenieria Informatica en la UCM, se trata de un generador y solucionador de laberintos
 creado en Java.
 
+## Como descargarlo y ejecutarlo
+
+1. Descargar la carpeta Launcher del repositorio
+2. Abrir la terminal (Linux, Mac) o CMD (Windows)
+3. ir al directorio que acabamos de descargar
+4. Ejecutar ***java -jar MazeGS.jar***
+
 ## Menú principal
 
 La aplicación cuenta con un menú principal, dicho menú es lo primero que veremos nada más iniciarla y nos permite seleccionar la altura y anchura del laberinto.
