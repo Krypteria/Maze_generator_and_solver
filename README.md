@@ -5,10 +5,11 @@ creado en Java.
 
 ## Como descargarlo y ejecutarlo
 
-1. Descargar la carpeta Launcher del repositorio
-2. Abrir la terminal (Linux, Mac) o CMD (Windows)
-3. ir al directorio que acabamos de descargar
-4. Ejecutar ***java -jar MazeGS.jar***
+1. Descargar el zip dentro de la carpeta Launcher del repositorio
+2. Descomprimir el zip 
+3. Abrir la terminal (Linux, Mac) o CMD (Windows)
+4. ir al directorio que acabamos de descargar
+5. Ejecutar ***java -jar MazeGS.jar*** (en Windows puede abrirse con doble click)
 
 ## Menú principal
 
